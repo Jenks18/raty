@@ -1,0 +1,53 @@
+.home-header {
+  margin-bottom: 2rem;
+}
+
+.summary-cards {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #f0f0f0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  flex-grow: 1;
+}
+
+.balance {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.pending {
+  color: orange;
+}
+
+.quick-actions button {
+  margin-right: 1rem;
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.transactions table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions th, .transactions td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
