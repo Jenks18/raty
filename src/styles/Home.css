@@ -9,9 +9,10 @@
 }
 
 .card {
-  background-color: #f0f0f0;
+  background-color: #FFFFFF;
   padding: 1.5rem;
   border-radius: 8px;
+  border: 1px solid #E5E7EB;
   flex-grow: 1;
 }
 
@@ -21,24 +22,29 @@
 }
 
 .positive {
-  color: green;
+  color: #22C55E;
 }
 
 .negative {
-  color: red;
+  color: #EF4444;
 }
 
 .pending {
-  color: orange;
+  color: #F59E42;
 }
 
 .quick-actions button {
   margin-right: 1rem;
   padding: 0.8rem 1.5rem;
-  border: 1px solid #ccc;
+  border: 1px solid #E5E7EB;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #FFFFFF;
   cursor: pointer;
+  color: #222222;
+}
+
+.quick-actions button:hover {
+  background-color: #F3F4F6;
 }
 
 .transactions table {
@@ -49,5 +55,5 @@
 .transactions th, .transactions td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #E5E7EB;
 }

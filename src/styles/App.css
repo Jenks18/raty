@@ -1,10 +1,13 @@
 .app {
   display: flex;
   height: 100vh;
+  font-family: 'Inter, sans-serif';
 }
 
 .main-content {
   flex-grow: 1;
   padding: 2rem;
   overflow-y: auto;
+  background-color: #FFFFFF;
+  color: #222222;
 }

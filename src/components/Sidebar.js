@@ -15,15 +15,15 @@ const Sidebar = () => {
       </button>
       <nav>
         <ul>
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Cards</a></li>
-          <li><a href="#">Transactions</a></li>
-          <li><a href="#">Drivers</a></li>
-          <li><a href="#">Vehicles</a></li>
-          <li><a href="#">Payroll</a></li>
-          <li><a href="#">Billing</a></li>
-          <li><a href="#">Telematics</a></li>
-          <li><a href="#">User</a></li>
+          <li><a href="#" className="active"><span className="nav-icon"></span><span className="nav-text">Dashboard</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Cards</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Transactions</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Drivers</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Vehicles</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Payroll</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Billing</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Telematics</span></a></li>
+          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">User</span></a></li>
         </ul>
       </nav>
     </div>
