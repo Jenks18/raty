@@ -31,6 +31,10 @@ function App() {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [open, setOpen] = React.useState(!isMobile);
 
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
   React.useEffect(() => {
     setOpen(!isMobile);
   }, [isMobile]);
@@ -40,8 +44,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={{ display: 'flex' }}>
-          <TopBar open={open} />
-          <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} />
+          <TopBar open={open} handleDrawerOpen={handleDrawerOpen} />
+          <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} handleDrawerOpen={handleDrawerOpen} />
           <MainContent open={open}>
             <Routes>
               <Route path="/" element={<Home />} />
