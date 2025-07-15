@@ -83,7 +83,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const Sidebar = ({ open, setOpen }) => {
+const Sidebar = ({ open, setOpen, isMobile }) => {
   const [openSubmenus, setOpenSubmenus] = useState({});
 
   const handleDrawerOpen = () => {
@@ -144,7 +144,7 @@ const Sidebar = ({ open, setOpen }) => {
   ];
 
   return (
-    <Drawer variant="permanent" open={open}>
+    <Drawer variant={isMobile ? 'temporary' : 'permanent'} open={open} onClose={handleDrawerClose}>
       <DrawerHeader>
         <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
           {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -164,16 +164,16 @@ const Sidebar = ({ open, setOpen }) => {
                   px: 2.5,
                 }}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          {item.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
                 {item.submenu && open && (openSubmenus[item.text] ? <ExpandLess /> : <ExpandMore />)}
               </ListItemButton>
             </ListItem>
@@ -191,15 +191,17 @@ const Sidebar = ({ open, setOpen }) => {
                           px: 2.5,
                         }}
                       >
-                        <ListItemIcon
-                          sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          {subItem.icon}
-                        </ListItemIcon>
+                        {open && (
+                          <ListItemIcon
+                            sx={{
+                              minWidth: 0,
+                              mr: open ? 3 : 'auto',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {subItem.icon}
+                          </ListItemIcon>
+                        )}
                         <ListItemText primary={subItem.text} sx={{ opacity: open ? 1 : 0 }} />
                       </ListItemButton>
                     </ListItem>

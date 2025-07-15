@@ -25,8 +25,15 @@ import Support from './pages/Support';
 import Logout from './pages/Logout';
 import theme from './themes/theme';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 function App() {
-  const [open, setOpen] = React.useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [open, setOpen] = React.useState(!isMobile);
+
+  React.useEffect(() => {
+    setOpen(!isMobile);
+  }, [isMobile]);
 
   return (
     <Router>
@@ -34,7 +41,7 @@ function App() {
         <CssBaseline />
         <Box sx={{ display: 'flex' }}>
           <TopBar open={open} />
-          <Sidebar open={open} setOpen={setOpen} />
+          <Sidebar open={open} setOpen={setOpen} isMobile={isMobile} />
           <MainContent open={open}>
             <Routes>
               <Route path="/" element={<Home />} />
