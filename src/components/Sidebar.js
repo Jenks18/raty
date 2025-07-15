@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -57,6 +58,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
+    '& .MuiDrawer-paper': {
+      position: 'relative',
+    },
     ...(open && {
       ...openedMixin(theme),
       '& .MuiDrawer-paper': openedMixin(theme),
@@ -80,15 +84,15 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { text: 'Dashboard', icon: <DashboardIcon /> },
-    { text: 'Cards', icon: <CreditCardIcon /> },
-    { text: 'Transactions', icon: <ReceiptIcon /> },
-    { text: 'Drivers', icon: <PeopleIcon /> },
-    { text: 'Vehicles', icon: <DirectionsCarIcon /> },
-    { text: 'Payroll', icon: <PaymentsIcon /> },
-    { text: 'Billing', icon: <AccountBalanceWalletIcon /> },
-    { text: 'Telematics', icon: <SpeedIcon /> },
-    { text: 'User', icon: <PersonIcon /> },
+    { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
+    { text: 'Cards', icon: <CreditCardIcon />, path: '/cards' },
+    { text: 'Transactions', icon: <ReceiptIcon />, path: '/transactions' },
+    { text: 'Drivers', icon: <PeopleIcon />, path: '/drivers' },
+    { text: 'Vehicles', icon: <DirectionsCarIcon />, path: '/vehicles' },
+    { text: 'Payroll', icon: <PaymentsIcon />, path: '/payroll' },
+    { text: 'Billing', icon: <AccountBalanceWalletIcon />, path: '/billing' },
+    { text: 'Telematics', icon: <SpeedIcon />, path: '/telematics' },
+    { text: 'User', icon: <PersonIcon />, path: '/user' },
   ];
 
   return (
@@ -102,6 +106,8 @@ const Sidebar = () => {
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
             <ListItemButton
+              component={Link}
+              to={item.path}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? 'initial' : 'center',
