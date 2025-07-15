@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
@@ -8,11 +8,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -30,6 +27,7 @@ import MapIcon from '@mui/icons-material/Map';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Typography from '@mui/material/Typography';
 
 const drawerWidth = 240;
 
@@ -84,15 +82,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 const Sidebar = ({ open, setOpen, isMobile, handleDrawerOpen }) => {
-  const [openSubmenus, setOpenSubmenus] = useState({});
-
   const handleDrawerClose = () => {
     setOpen(false);
-    setOpenSubmenus({});
-  };
-
-  const handleSubmenuClick = (text) => {
-    setOpenSubmenus((prev) => ({ ...prev, [text]: !prev[text] }));
   };
 
   const menuItems = [
@@ -149,35 +140,16 @@ const Sidebar = ({ open, setOpen, isMobile, handleDrawerOpen }) => {
       <List>
         {menuItems.map((item) => (
           <React.Fragment key={item.text}>
-            <ListItem disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                component={item.path ? Link : 'div'}
-                to={item.path}
-                onClick={item.submenu ? () => handleSubmenuClick(item.text) : null}
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                        <ListItemIcon
-                          sx={{
-                            minWidth: 0,
-                            mr: open ? 3 : 'auto',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          {item.icon}
-                        </ListItemIcon>
-                        <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                {item.submenu && open && (openSubmenus[item.text] ? <ExpandLess /> : <ExpandMore />)}
-              </ListItemButton>
-            </ListItem>
-            {item.submenu && (
-              <Collapse in={openSubmenus[item.text]} timeout="auto" unmountOnExit>
+            {item.submenu ? (
+              <>
+                <ListItem disablePadding sx={{ display: 'block' }}>
+                  <Typography variant="caption" sx={{ pl: 2.5, display: open ? 'block' : 'none' }}>
+                    {item.text}
+                  </Typography>
+                </ListItem>
                 <List component="div" disablePadding>
                   {item.submenu.map((subItem) => (
-                    <ListItem key={subItem.text} disablePadding sx={{ pl: 4 }}>
+                    <ListItem key={subItem.text} disablePadding sx={{ pl: open ? 2.5 : 0 }}>
                       <ListItemButton
                         component={Link}
                         to={subItem.path}
@@ -187,23 +159,44 @@ const Sidebar = ({ open, setOpen, isMobile, handleDrawerOpen }) => {
                           px: 2.5,
                         }}
                       >
-                        {open && (
-                          <ListItemIcon
-                            sx={{
-                              minWidth: 0,
-                              mr: open ? 3 : 'auto',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            {subItem.icon}
-                          </ListItemIcon>
-                        )}
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          {subItem.icon}
+                        </ListItemIcon>
                         <ListItemText primary={subItem.text} sx={{ opacity: open ? 1 : 0 }} />
                       </ListItemButton>
                     </ListItem>
                   ))}
                 </List>
-              </Collapse>
+              </>
+            ) : (
+              <ListItem disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
             )}
           </React.Fragment>
         ))}

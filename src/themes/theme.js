@@ -9,7 +9,7 @@ const theme = createTheme({
       main: '#F59E42',
     },
     background: {
-      default: '#FFFFFF',
+      default: '#F7F8FA',
     },
     text: {
       primary: '#222222',
@@ -17,7 +17,13 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: 'Roboto, sans-serif',
+    h4: {
+      fontWeight: 700,
+    },
+    h6: {
+      fontWeight: 600,
+    },
   },
 });
 
