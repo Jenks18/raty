@@ -1,32 +1,128 @@
 import React, { useState } from 'react';
-import '../styles/Sidebar.css';
+import { styled } from '@mui/material/styles';
+import MuiDrawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import PeopleIcon from '@mui/icons-material/People';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import SpeedIcon from '@mui/icons-material/Speed';
+import PersonIcon from '@mui/icons-material/Person';
+
+const drawerWidth = 240;
+
+const openedMixin = (theme) => ({
+  width: drawerWidth,
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: 'hidden',
+});
+
+const closedMixin = (theme) => ({
+  transition: theme.transitions.create('width', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: 'hidden',
+  width: `calc(${theme.spacing(7)} + 1px)`,
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+}));
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+  }),
+);
 
 const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const menuItems = [
+    { text: 'Dashboard', icon: <DashboardIcon /> },
+    { text: 'Cards', icon: <CreditCardIcon /> },
+    { text: 'Transactions', icon: <ReceiptIcon /> },
+    { text: 'Drivers', icon: <PeopleIcon /> },
+    { text: 'Vehicles', icon: <DirectionsCarIcon /> },
+    { text: 'Payroll', icon: <PaymentsIcon /> },
+    { text: 'Billing', icon: <AccountBalanceWalletIcon /> },
+    { text: 'Telematics', icon: <SpeedIcon /> },
+    { text: 'User', icon: <PersonIcon /> },
+  ];
+
   return (
-    <div className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
-      <button onClick={toggleSidebar} className="toggle-btn">
-        {isExpanded ? '<<' : '>>'}
-      </button>
-      <nav>
-        <ul>
-          <li><a href="#" className="active"><span className="nav-icon"></span><span className="nav-text">Dashboard</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Cards</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Transactions</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Drivers</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Vehicles</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Payroll</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Billing</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">Telematics</span></a></li>
-          <li><a href="#"><span className="nav-icon"></span><span className="nav-text">User</span></a></li>
-        </ul>
-      </nav>
-    </div>
+    <Drawer variant="permanent" open={open}>
+      <DrawerHeader>
+        <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
+          {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <List>
+        {menuItems.map((item) => (
+          <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center',
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                }}
+              >
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Drawer>
   );
 };
 

@@ -1,13 +1,15 @@
 import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
-import { ThemeProvider } from './themes/ThemeContext';
 import Home from './pages/Home';
-import './styles/App.css';
+import theme from './themes/theme';
 
 function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div className="app">
         <Sidebar />
         <MainContent>
