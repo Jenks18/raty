@@ -26,14 +26,16 @@ import Logout from './pages/Logout';
 import theme from './themes/theme';
 
 function App() {
+  const [open, setOpen] = React.useState(false);
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <TopBar />
         <Box sx={{ display: 'flex' }}>
-          <Sidebar />
-          <MainContent>
+          <TopBar open={open} />
+          <Sidebar open={open} setOpen={setOpen} />
+          <MainContent open={open}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cards" element={<Cards />} />

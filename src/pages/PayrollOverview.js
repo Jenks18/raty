@@ -1,10 +1,13 @@
 import React from 'react';
 import { Typography, Box, Grid, Card, CardContent, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   minWidth: 275,
   marginBottom: theme.spacing(3),
+  boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+  borderRadius: '8px',
 }));
 
 const PayrollOverview = () => {
@@ -52,12 +55,27 @@ const PayrollOverview = () => {
               { name: 'Leslie Stephenson', debitCard: '7713' },
             ].map((driver) => (
               <TableRow key={driver.name}>
-                <TableCell>{driver.name}</TableCell>
+                <TableCell>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <AttachMoneyIcon sx={{ color: 'green', mr: 1 }} />
+                    {driver.name}
+                  </Box>
+                </TableCell>
                 <TableCell>Unselected</TableCell>
                 <TableCell>{driver.debitCard}</TableCell>
-                <TableCell>$0.00</TableCell>
-                <TableCell>$0.00</TableCell>
-                <TableCell><Typography color="warning.main">PENDING</Typography></TableCell>
+                <TableCell>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <AttachMoneyIcon sx={{ color: 'green', mr: 1 }} />
+                    $0.00
+                  </Box>
+                </TableCell>
+                <TableCell>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <AttachMoneyIcon sx={{ color: 'green', mr: 1 }} />
+                    $0.00
+                  </Box>
+                </TableCell>
+                <TableCell><Typography color="warning.main" sx={{ fontWeight: 'bold' }}>PENDING</Typography></TableCell>
               </TableRow>
             ))}
           </TableBody>

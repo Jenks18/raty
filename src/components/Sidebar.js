@@ -22,6 +22,14 @@ import PaymentsIcon from '@mui/icons-material/Payments';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import SpeedIcon from '@mui/icons-material/Speed';
 import PersonIcon from '@mui/icons-material/Person';
+import HistoryIcon from '@mui/icons-material/History';
+import DescriptionIcon from '@mui/icons-material/Description';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import LinkIcon from '@mui/icons-material/Link';
+import MapIcon from '@mui/icons-material/Map';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const drawerWidth = 240;
 
@@ -75,8 +83,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const Sidebar = () => {
-  const [open, setOpen] = useState(false);
+const Sidebar = ({ open, setOpen }) => {
   const [openSubmenus, setOpenSubmenus] = useState({});
 
   const handleDrawerOpen = () => {
@@ -102,36 +109,36 @@ const Sidebar = () => {
       text: 'Payroll',
       icon: <PaymentsIcon />,
       submenu: [
-        { text: 'Payroll Overview', path: '/payroll' },
-        { text: 'Payroll History', path: '/payroll/history' },
+        { text: 'Payroll Overview', icon: <PaymentsIcon />, path: '/payroll' },
+        { text: 'Payroll History', icon: <HistoryIcon />, path: '/payroll/history' },
       ],
     },
     {
       text: 'Billing',
       icon: <AccountBalanceWalletIcon />,
       submenu: [
-        { text: 'Statements', path: '/billing/statements' },
-        { text: 'Payment History', path: '/billing/payment-history' },
-        { text: 'Payment Methods', path: '/billing/payment-methods' },
-        { text: 'Manage API Tokens', path: '/billing/manage-api-tokens' },
+        { text: 'Statements', icon: <DescriptionIcon />, path: '/billing/statements' },
+        { text: 'Payment History', icon: <HistoryIcon />, path: '/billing/payment-history' },
+        { text: 'Payment Methods', icon: <CreditCardIcon />, path: '/billing/payment-methods' },
+        { text: 'Manage API Tokens', icon: <VpnKeyIcon />, path: '/billing/manage-api-tokens' },
       ],
     },
     {
       text: 'Telematics',
       icon: <SpeedIcon />,
       submenu: [
-        { text: 'Connect', path: '/telematics/connect' },
-        { text: 'Vehicles / Cards', path: '/telematics/vehicles-and-cards' },
-        { text: 'Trucks Map', path: '/telematics/trucks-map' },
+        { text: 'Connect', icon: <LinkIcon />, path: '/telematics/connect' },
+        { text: 'Vehicles / Cards', icon: <DirectionsCarIcon />, path: '/telematics/vehicles-and-cards' },
+        { text: 'Trucks Map', icon: <MapIcon />, path: '/telematics/trucks-map' },
       ],
     },
     {
       text: 'User',
       icon: <PersonIcon />,
       submenu: [
-        { text: 'Refer & Earn', path: '/user/refer-and-earn' },
-        { text: 'Support', path: '/user/support' },
-        { text: 'Log Out', path: '/user/logout' },
+        { text: 'Refer & Earn', icon: <CardGiftcardIcon />, path: '/user/refer-and-earn' },
+        { text: 'Support', icon: <SupportAgentIcon />, path: '/user/support' },
+        { text: 'Log Out', icon: <ExitToAppIcon />, path: '/user/logout' },
       ],
     },
   ];
@@ -184,6 +191,15 @@ const Sidebar = () => {
                           px: 2.5,
                         }}
                       >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : 'auto',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          {subItem.icon}
+                        </ListItemIcon>
                         <ListItemText primary={subItem.text} sx={{ opacity: open ? 1 : 0 }} />
                       </ListItemButton>
                     </ListItem>
