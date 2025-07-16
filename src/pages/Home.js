@@ -2,6 +2,22 @@ import React from 'react';
 import { Box, Card, CardContent, Typography, Button, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const Home = () => {
+  const handleApiCall = async (endpoint) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount: 100 }), // Example data
+      });
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <Box>
       <Typography variant="h4" gutterBottom>
@@ -26,9 +42,9 @@ const Home = () => {
         </Grid>
       </Grid>
       <Box sx={{ mb: 3 }}>
-        <Button variant="contained" sx={{ mr: 1 }}>Deposit</Button>
-        <Button variant="contained" sx={{ mr: 1 }}>Withdraw</Button>
-        <Button variant="contained">Pay</Button>
+        <Button variant="contained" sx={{ mr: 1 }} onClick={() => handleApiCall('deposit')}>Deposit</Button>
+        <Button variant="contained" sx={{ mr: 1 }} onClick={() => handleApiCall('withdraw')}>Withdraw</Button>
+        <Button variant="contained" onClick={() => handleApiCall('pay')}>Pay</Button>
       </Box>
       <Typography variant="h5" gutterBottom>
         Transactions
